@@ -1,0 +1,40 @@
+<div class="w-full py-6">
+    <div class="overflow-hidden">
+    <a href="{{ product.url }}">
+        <div class="relative ">
+            {% if product.featured_image %}
+                <div class="overflow-hidden h-96" style="background-color: #e9e4db; height: 34rem;">
+                    <img class="w-full z-40 h-full object-cover" src="{{ product.featured_image | img_url: 'large' }}" alt="{{ product.featured_image.alt }}">  
+                </div>
+                {% if product.images.size > 1 %}
+                    <div class="transition duration-500 ease-in-out transform absolute top-0 w-full h-full opacity-0 hover:opacity-100 ">
+                        <img class="w-full h-full object-cover" src="{{ product.images.last |  img_url: 'large'}}" alt="{{ product.images.last.alt }}">
+                        <button class=" font-mono uppercase tracking-widest text-sm text-white py-2 px-3 bg-gray-800 absolute bottom-0" style="  left: 50%;
+                        transform: translateX(-50%);
+                      ">
+                      Quick Add
+                    </button>
+                    </div>
+                {% endif %}
+               
+    
+    
+                {% else %}
+                    {{ 'product-1' | placeholder_svg_tag: "w-full object-cover bg-gray-100" }}
+                
+            {% endif %}
+        </div>
+    
+
+    </a>
+    <div class="flex flex-col py-4">
+        <span class=" text-md font-medium text-gray-600">{{ product.title }}</span>
+
+        <a class="text-gray-700 py-2 tracking-wider	uppercase text-sm" href="{{ product.url }}">{{ product.description |  truncatewords: 10, '...' }}</a>
+        
+        <p class="text-gray-900 font-mono font-bold">{{ product.price | money }}</p>
+    </div>
+ 
+    
+    </div>
+</div>

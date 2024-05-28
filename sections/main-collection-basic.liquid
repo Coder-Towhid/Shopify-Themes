@@ -1,0 +1,109 @@
+<div x-data="{ open: false }">
+  <div class=" relative">
+    <img
+      class="w-full h-96 object-cover "
+      src="{{ collection.featured_image |  img_url: 'large' }}"
+      alt="{{ collection.featured_image.alt }}">
+    <div class="max-w-7xl absolute inset-x-0 top-2/3 mx-auto ">
+      <div class="flex flex-col items-center py-8" style="background: #FEF8F0 ">
+        <h1 class="text-gray-900 text-4xl font-large ">Interior Paint Colors</h1>
+        <p class="text-gray-600 mt-6 text-base ">Premium, zero VOC paint in designer-curated colors you'll love.</p>
+      </div>
+
+      <div class="px-2 grid grid-cols-1 md:grid-cols-[250px_minmax(250px,_1fr)] gap-10">
+        <div class="md:hidden">
+          <div class=" border mt-5 w-2/5 px-5 py-3 border-gray-900 rounded-full flex justify-center items-center gap-2">
+            {% render 'icon-filter' %}
+            <p>Filter & Sort</p>
+          </div>
+        </div>
+        <div class=" hidden md:block sticky top-5 h-fit">
+
+          {% for product in collection.products %}
+            <div class="product">
+              {% if product.variants.size > 1 %}
+                <ul>
+                  {% for variant in product.variants %}
+                    <li>
+                      {{ variant.title }}
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% else %}
+                <p>No variants available for this product.</p>
+              {% endif %}
+            </div>
+          {% endfor %}
+
+          <div class="mt-6 border-t w-full ">
+            <div class="filter-title mt-4 flex justify-between items-center" x-on:click="open = ! open">
+              <p>Color</p>
+              <div x-show="open">
+                {% render 'icon-drop-up' %}
+              </div>
+              <div x-show="!open">
+                {% render 'icon-drown' %}
+              </div>
+            </div>
+            <div class="filter-container grid grid-cols-1 md:grid-cols-2 gap-4 p-4" x-show="open">
+              <div class="pl-3 border h-10 rounded-3xl flex items-center gap-4">
+                <span class="w-5 h-5 rounded-full bg-red-400"></span>
+                <p>Red</p>
+              </div>
+              <div class="pl-3 border h-10 rounded-3xl flex items-center gap-4">
+                <span class="w-5 h-5 rounded-full bg-red-400"></span>
+                <p>Red</p>
+              </div>
+            </div>
+          </div>
+          <div class="mt-6 border-t w-full ">
+            <div class="filter-title mt-4 flex justify-between items-center" x-on:click="open = ! open">
+              <p>Color</p>
+              <div x-show="open">
+                {% render 'icon-drop-up' %}
+              </div>
+              <div x-show="!open">
+                {% render 'icon-drown' %}
+              </div>
+            </div>
+            <div class="filter-container grid grid-cols-1 md:grid-cols-2 gap-4 p-4" x-show="open">
+              <div class="pl-3 border h-10 rounded-3xl flex items-center gap-4">
+                <span class="w-5 h-5 rounded-full bg-red-400"></span>
+                <p>Red</p>
+              </div>
+              <div class="pl-3 border h-10 rounded-3xl flex items-center gap-4">
+                <span class="w-5 h-5 rounded-full bg-red-400"></span>
+                <p>Red</p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+        <div>
+          <div class="flex justify-center md:justify-between items-center mt-6">
+            <span class="block text-center md:text-start">{{ collection.products_count }} products</span>
+            <form class="hidden md:flex items-center">
+              <label for="filters" class="block text-sm font-medium text-gray-400">Sort By:</label>
+              <select id="filters" class="">
+                <option selected>Light to Dark</option>
+                <option value="Dark">Dark to Light</option>
+                <option value="Trending">Trending</option>
+                <option value="new">What's new</option>
+              </select>
+            </form>
+          </div>
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            {% for product in collection.products %}
+              {% render 'product-card-basic'
+                , product: product %}
+            {% else %}
+              <p>There are no products inside of this collection</p>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

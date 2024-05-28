@@ -1,0 +1,8 @@
+{
+    "sections": {
+        "template":{
+            "type": "main-collection-basic"
+        }
+    },
+    "order": ["template"]
+}
