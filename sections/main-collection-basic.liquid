@@ -2,7 +2,7 @@
   <div class=" relative">
     <img
       class="w-full h-96 object-cover "
-      src="{{ collection.featured_image |  img_url: 'large' }}"
+      src="{{ collection.featured_image |  img_url: 'original' }}"
       alt="{{ collection.featured_image.alt }}">
     <div class="max-w-7xl absolute inset-x-0 top-2/3 mx-auto ">
       <div class="flex flex-col items-center py-8" style="background: #FEF8F0 ">
@@ -18,23 +18,6 @@
           </div>
         </div>
         <div class=" hidden md:block sticky top-5 h-fit">
-
-          {% for product in collection.products %}
-            <div class="product">
-              {% if product.variants.size > 1 %}
-                <ul>
-                  {% for variant in product.variants %}
-                    <li>
-                      {{ variant.title }}
-                    </li>
-                  {% endfor %}
-                </ul>
-              {% else %}
-                <p>No variants available for this product.</p>
-              {% endif %}
-            </div>
-          {% endfor %}
-
           <div class="mt-6 border-t w-full ">
             <div class="filter-title mt-4 flex justify-between items-center" x-on:click="open = ! open">
               <p>Color</p>
@@ -46,38 +29,30 @@
               </div>
             </div>
             <div class="filter-container grid grid-cols-1 md:grid-cols-2 gap-4 p-4" x-show="open">
-              <div class="pl-3 border h-10 rounded-3xl flex items-center gap-4">
-                <span class="w-5 h-5 rounded-full bg-red-400"></span>
-                <p>Red</p>
-              </div>
-              <div class="pl-3 border h-10 rounded-3xl flex items-center gap-4">
-                <span class="w-5 h-5 rounded-full bg-red-400"></span>
-                <p>Red</p>
-              </div>
-            </div>
-          </div>
-          <div class="mt-6 border-t w-full ">
-            <div class="filter-title mt-4 flex justify-between items-center" x-on:click="open = ! open">
-              <p>Color</p>
-              <div x-show="open">
-                {% render 'icon-drop-up' %}
-              </div>
-              <div x-show="!open">
-                {% render 'icon-drown' %}
-              </div>
-            </div>
-            <div class="filter-container grid grid-cols-1 md:grid-cols-2 gap-4 p-4" x-show="open">
-              <div class="pl-3 border h-10 rounded-3xl flex items-center gap-4">
-                <span class="w-5 h-5 rounded-full bg-red-400"></span>
-                <p>Red</p>
-              </div>
-              <div class="pl-3 border h-10 rounded-3xl flex items-center gap-4">
-                <span class="w-5 h-5 rounded-full bg-red-400"></span>
-                <p>Red</p>
-              </div>
-            </div>
+              {% for product in collection.products %}
+                <div class="product">
+                  {% if product.variants %}
+                    <ul>
+                      {% for variant in product.variants %}
+                        <li>
 
+                          <div class="pl-3 border h-10 rounded-3xl flex items-center gap-4">
+                            <span class="w-5 h-5 rounded-full bg-{{ variant.title }}-900"></span>
+                            <p>{{ variant.title }}</p>
+                          </div>
+
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  {% else %}
+                    <p>No variants available for this product.</p>
+                  {% endif %}
+                </div>
+              {% endfor %}
+
+            </div>
           </div>
+
 
         </div>
         <div>
