@@ -1,4 +1,4 @@
-<div class="relateive  bg-white fixed top-0 left-0 w-full bg-white shadow-md transition duration-300 ease-in-out z-10" x-data="{ mobileMenuOpen : false, searchBarOpen: false}">
+<div class="relateive  bg-white  w-full bg-white shadow-md transition duration-300 ease-in-out z-10" x-data="{ mobileMenuOpen : false, searchBarOpen: false}">
   <div class="mx-auto px-4 sm:px-6">
     <div class="flex justify-center items-center py-6 md:justify-start md:space-x-10">
       {% comment %} store name/logo {% endcomment %}
@@ -73,7 +73,7 @@
             {{ 'log out' | customer_logout_link | replace: '<a', '<a class="text-base text-gray-500 hover:text-gray-900"' }}
           {% else %}
             {{ 'log in ' | customer_login_link | replace: '<a'
-, '<a class="text-base text-gray-500 hover:text-gray-900"' }} {{ 'register' | customer_register_link | 
+ , '<a class="text-base text-gray-500 hover:text-gray-900"' }} {{ 'register' | customer_register_link | 
  replace: '<a', '<a class="text-base text-gray-500 hover:text-gray-900"' }}
           {% endif %}
         {% endif %}
