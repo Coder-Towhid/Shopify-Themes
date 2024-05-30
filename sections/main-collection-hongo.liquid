@@ -2,9 +2,17 @@
 
   {% if collection.featured_image != blank %}
     <img
-      class="w-full h-96 object-cover "
-      alt="{{ collection.featured_image.alt }}"
-      src="{{ collection.featured_image |  img_url: 'master'    }}">
+      class="
+  w-full
+  h-96
+  object-cover
+  "
+      alt="
+  {{ collection.featured_image.alt }}
+  "
+      src="
+  {{ collection.featured_image | img_url: 'master' }}
+  ">
 
   {% else %}
     {{ 'lifestyle-2' | placeholder_svg_tag: "w-full h-96 object-cover " }}
@@ -14,17 +22,39 @@
   <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
     <h1 class="text-5xl text-gray-800 ">{{ collection.title }}</h1>
   </div>
-
 </div>
-
-<div class="container mx-auto grid grid-cols-1 lg:grid-cols-[250px_minmax(250px,_1fr)] gap-10 py-12 md:py-20 lg:py-32 ">
+<div x-data="{ gridCols: 4 }" class="container mx-auto grid grid-cols-1 lg:grid-cols-[250px_minmax(250px,_1fr)] gap-10 py-12 md:py-20 lg:py-32 ">
   <div>
     <span class="text-xs font-medium">Filter by color</span>
+
   </div>
   <div>
     <div class="flex justify-center md:justify-between items-center">
-      <span class="block text-sm text-gray-500 text-center md:text-start">
-        showing {{ collection.products_count }} all results</span>
+      <div class="flex gap-4">
+        <span class="block text-sm text-gray-500 text-center md:text-start">
+          showing {{ collection.products_count }} all results |</span>
+
+        <div class="flex gap-4">
+          <div @click=" gridCols = 2">
+            <span class="px-1 mx-1 h-8 w-6 border border-gray-500"></span>
+            <span class="px-1 mx-1  h-8 w-6 border border-gray-500"></span>
+          </div>
+          <div @click=" gridCols = 3">
+            <span class="px-1 mx-1 h-4 w-6 border border-gray-500"></span>
+            <span class="px-1 mx-1 h-4 w-6 border border-gray-500"></span>
+            <span class="px-1 mx-1 h-4 w-6 border border-gray-500"></span>
+          </div>
+          <div @click=" gridCols = 4">
+            <span class="px-1 mx-1 h-8 w-6 border border-gray-500"></span>
+            <span class="px-1 mx-1 h-8 w-6 border border-gray-500"></span>
+            <span class="px-1 mx-1 h-8 w-6 border border-gray-500"></span>
+            <span class="px-1 mx-1 h-8 w-6 border border-gray-500"></span>
+          </div>
+        </div>
+
+      </div>
+
+
       <form class="hidden md:flex items-center">
         <label for="filters" class="block text-sm font-medium text-gray-400">Sort By:</label>
         <select id="filters" class="">
@@ -35,7 +65,8 @@
         </select>
       </form>
     </div>
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+    {% comment %} <h1 x-text="gridCols"></h1> {% endcomment %}
+    <div :class="'grid-cols-'+ gridCols +' grid gap-6'">
       {% for product in collection.products %}
         {% render 'product-card-hongo'
           , product: product %}
