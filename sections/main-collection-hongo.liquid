@@ -18,10 +18,13 @@
 </div>
 
 <div class="container mx-auto grid grid-cols-1 lg:grid-cols-[250px_minmax(250px,_1fr)] gap-10 py-12 md:py-20 lg:py-32 ">
-  <div></div>
   <div>
-    <div class="flex justify-center md:justify-between items-center mt-6">
-      <span class="block text-center md:text-start">{{ collection.products_count }} products</span>
+    <span class="text-xs font-medium">Filter by color</span>
+  </div>
+  <div>
+    <div class="flex justify-center md:justify-between items-center">
+      <span class="block text-sm text-gray-500 text-center md:text-start">
+        showing {{ collection.products_count }} all results</span>
       <form class="hidden md:flex items-center">
         <label for="filters" class="block text-sm font-medium text-gray-400">Sort By:</label>
         <select id="filters" class="">
