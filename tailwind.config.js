@@ -2,7 +2,11 @@
 module.exports = {
   content: ["./**/*.{html,liquid}"],
   theme: {
-    extend: {},
+    extend: {
+      height: {
+        '94': '22rem'
+      },
+    },
   },
   safelist: [
     'grid-cols-3'
