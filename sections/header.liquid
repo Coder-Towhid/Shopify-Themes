@@ -1,4 +1,4 @@
-<div class="relateive  bg-white  w-full bg-white shadow-md transition duration-300 ease-in-out z-10" x-data="{ mobileMenuOpen : false, searchBarOpen: false}">
+<header class="relateive header fixed top-0 bg-white w-full bg-white shadow-md transition-all transition transform duration-300 ease-in-out z-10" x-data="{ mobileMenuOpen : false, searchBarOpen: false}">
   <div class="mx-auto px-4 sm:px-6">
     <div class="flex justify-center items-center py-6 md:justify-start md:space-x-10">
       {% comment %} store name/logo {% endcomment %}
@@ -156,24 +156,31 @@
     </div>
   </div>
 
-</div>
+</header>
 <script>
-    const header = document.querySelector('header');
-  let previousScrollY = 0; // Store previous scroll position
+   var prevScrollpos = window.pageYOffset;
   
-  window.addEventListener('scroll', () => {
-  const scrollY = window.scrollY; // Get scroll position
+  /* Get the header element and it's position */
+  var headerDiv = document.querySelector("header");
+  var headerBottom = headerDiv.offsetTop + headerDiv.offsetHeight;
   
-  if (scrollY > previousScrollY) {
-    // Scrolling down, hide header
-    header.classList.add('invisible');
-  } else {
-    // Scrolling up or at the top, show header
-    header.classList.remove('invisible');
+  window.onscroll = function() {
+  var currentScrollPos = window.pageYOffset;
+  
+  /* if scrolling down, let it scroll out of view as normal */
+  if (prevScrollpos <= currentScrollPos ){
+    
+      headerDiv.style.top ="-7.2rem";
+  }
+   
+  /* otherwise if we're scrolling up, fix the nav to the top */
+  else{  
+     
+      headerDiv.style.top = "0";
   }
   
-  previousScrollY = scrollY; // Update previous scroll position
-  });
+  prevScrollpos = currentScrollPos;
+  }
 </script>
 
 {% schema %}

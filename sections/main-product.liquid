@@ -50,27 +50,34 @@
 
 
 <div class="max-w-6xl mx-auto my-8">
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-    <div class="product--medias h-fit sticky top-5 p-2">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="product--medias h-fit md:sticky top-5 ">
       <div class="hidden md:block">
 
         <div class="h-100 overflow-hidden p-2">
 
 
-          <div class="swiper h-94 md:h-96">
-            <div class="swiper-wrapper">
-              {% for media in product.media %}
-                <div class="swiper-slide">
-                  <div class="overflow-hidden p-2 h-full">
-                    {% render 'product-media'
-                      , media: media %}
+          <div class="swiper h-94 md:h-fit">
+            {% if product.featured_image != blank %}
+              <div class="swiper-wrapper">
+                {% for media in product.media %}
+                  <div class="swiper-slide">
+                    <div class="overflow-hidden  h-full">
+                      {% render 'product-media'
+                        , media: media %}
+                    </div>
                   </div>
-                </div>
 
-              {% endfor %}
-            </div>
+                {% endfor %}
+              </div>
+
+            {% else %}
+              {{ 'product-1' | placeholder_svg_tag }}
+            {% endif %}
+
 
             <div class="swiper-pagination md:!w-fit"></div>
+
 
           </div>
 
@@ -418,7 +425,11 @@
 
 
 <script>
-  
+   var imagesLarge = [
+    {% for media in product.media %}
+          "{{ media | img_url: '100x100' }}",
+          {% endfor %}
+  ];
   
       const swiper = new Swiper('.swiper', {
     
@@ -428,12 +439,13 @@
       el: '.swiper-pagination',
       clickable: true,
       renderBullet: function (index, className) {
-        var images = [
-          {% for media in product.media %}
-          "{{ media | img_url: '100x100' }}",
-          {% endfor %}
-        ]; // Thumbnail images
-        return '<img src="' + images[index] + '" class="' + className + '" />';
+        var images = window.innerWidth >= 768 ? imagesLarge : [];
+         // Thumbnail images
+         if (images.length) {
+      return '<img src="' + images[index] + '" class="' + className + '" />';
+    } else {
+      return '<span class="' + className + '"></span>';
+    }
       },
     },
     

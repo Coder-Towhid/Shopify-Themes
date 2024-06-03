@@ -25,6 +25,22 @@
     <!-- Header hook for plugins -->
 
     {{ 'application.css' | asset_url | stylesheet_tag }}
+    <style>
+
+
+      /*
+   header.fixedToTop { 
+   position: fixed; 
+   top: 0; 
+   left: 0; 
+   right: 0; 
+   }
+*/
+
+      /* add space for fixed header when it's fixed to top */main.content {
+        padding-top: 8rem;
+      }
+    </style>
 
 
   </head>
@@ -32,7 +48,7 @@
     {% section 'header' %}
 
 
-    <main role="main">
+    <main class="content" role="main">
       {{ content_for_layout }}
     </main>
   </body>
