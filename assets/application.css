@@ -782,10 +782,6 @@ video {
   height: 20rem;
 }
 
-.h-94 {
-  height: 22rem;
-}
-
 .h-96 {
   height: 24rem;
 }
@@ -867,6 +863,10 @@ video {
 
 .grid-cols-2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .grid-cols-4 {
